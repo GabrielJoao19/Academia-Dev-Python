@@ -43,7 +43,7 @@ http://localhost:8000 (frontend)
 http://localhost:8000/api/... (endpoints DRF)
 ```
 
-## 💻 Documentação dos Endpoints da API
+## Documentação dos Endpoints da API
 
 ### I. Gerenciamento de Entidades (CRUD Básico)
 
