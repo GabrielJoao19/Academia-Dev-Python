@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}Editar Aluno - {{ aluno.nome }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="title is-3">Editar Aluno: {{ aluno.nome }}</h1>
+
+        <div class="box mb-6">
+            <h2 class="subtitle is-5 has-text-warning">Modifique os campos necessários</h2>
+            
+            <form method="post" action="{% url 'alunos:editar_aluno' aluno_id=aluno.id %}"> 
+                {% csrf_token %} 
+                
+                <div class="field">
+                    <label class="label" for="id_nome">Nome Completo</label>
+                    <div class="control">
+                        <input class="input" type="text" name="nome" id="id_nome" 
+                               placeholder="Nome Completo" value="{{ aluno.nome }}" required>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label" for="id_cpf">CPF</label>
+                    <div class="control">
+                        <input class="input" type="text" name="cpf" id="id_cpf" 
+                               placeholder="999.999.999-99" value="{{ aluno.cpf }}" required>
+                    </div>
+                </div>
+                
+                <div class="field">
+                    <label class="label" for="id_email">E-mail</label>
+                    <div class="control">
+                        <input class="input" type="email" name="email" id="id_email" 
+                               placeholder="email@exemplo.com" value="{{ aluno.email }}" required>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label" for="id_data_ingresso">Data de Ingresso</label>
+                    <div class="control">
+                        <input class="input" type="date" name="data_ingresso" id="id_data_ingresso" 
+                               value="{{ aluno.data_ingresso|date:'Y-m-d' }}" required>
+                    </div>
+                </div>
+                
+                <div class="control mt-5">
+                    <button class="button is-warning" type="submit">
+                        <span class="icon is-small"><i class="fas fa-save"></i></span>
+                        <span>Salvar Alterações</span>
+                    </button>
+                    <a href="" class="button is-light">
+                        Cancelar
+                    </a>
+                </div>
+            </form>
+        </div>
+        
+        <hr>
+        <div class="has-text-centered">
+            <p class="is-size-7 has-text-grey">Você está editando o registro de {{ aluno.nome }}.</p>
+        </div>
+
+    </div>
+{% endblock %}

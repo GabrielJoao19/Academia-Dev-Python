@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}Editar Curso -{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="title is-3">Editar Matrícula: </h1>
+
+        <div class="box mb-6">
+            <h2 class="subtitle is-5 has-text-warning">Modifique os campos necessários</h2>
+            
+            <form method="post" action="{% url 'matriculas:editar_matricula' matricula_id=matricula.id %}"> 
+            {% csrf_token %} 
+    
+                <div class="field">
+                    <label class="label" for="id_carga_horaria">Aluno</label>
+                    <div class="control">
+                        <div class="select is-fullwidth">
+                            <select name="aluno" id="" required>
+                                <option value="" disabled selected>--- Selecione o aluno ---</option>
+                                {% for aluno in alunos %}
+                                    <option value="{{ aluno.id }}">{{ aluno.nome }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+            <div class="field">
+                    <label class="label" for="id_carga_horaria">Curso</label>
+                    <div class="control">
+                        <div class="select is-fullwidth">
+                            <select name="curso" id="" required>
+                                <option value="" disabled selected>--- Selecione o curso ---</option>
+                                {% for curso in cursos %}
+                                    <option value="{{ curso.id }}">{{ curso.nome }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="field">
+                    <label class="label" for="id_valor_inscricao">Status</label>
+                    <div class="control">
+                        <div class="select is-fullwidth">
+                            <select name="status" id="" required>
+                                <option value="" disabled selected>--- Selecione o status ---</option>
+                                <option value="True">Ativo</option>
+                                <option value="False">Pendente</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="field">
+                    <label class="label" for="id_data_ingresso">Data da matrícula</label>
+                    <div class="control">
+                        <input class="input" type="date" name="data_matricula" id="" required>
+                    </div>
+                </div>
+
+                <div class="control mt-5">
+                        <button class="button is-primary" type="submit">
+                            <span class="icon is-small"><i class="fas fa-user-plus"></i></span>
+                            <span>Salvar matrícula</span>
+                        </button>
+                    </div>
+            </form>
+        </div>
+        
+        <hr>
+        <div class="has-text-centered">
+            <p class="is-size-7 has-text-grey">Você está editando o registro de {{ curso.nome }}.</p>
+        </div>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block title %}Início - Academia Dev Python{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        <div class="box mb-6">
+            <h2 class="title is-4 has-text-primary">Novo Aluno</h2>
+            
+            <form method="post" action="{% url 'alunos:alunos' %}"> 
+                {% csrf_token %} <div class="field">
+                    <label class="label" for="id_nome">Nome Completo</label>
+                    <div class="control">
+                        <input class="input" type="text" name="nome" id="id_nome" placeholder="Nome Completo" required>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label" for="id_cpf">CPF</label>
+                    <div class="control">
+                        <input class="input" type="text" name="cpf" id="id_cpf" placeholder="999.999.999-99" required>
+                    </div>
+                </div>
+                
+                <div class="field">
+                    <label class="label" for="id_email">E-mail</label>
+                    <div class="control">
+                        <input class="input" type="email" name="email" id="id_email" placeholder="email@exemplo.com" required>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label" for="id_data_ingresso">Data de Ingresso</label>
+                    <div class="control">
+                        <input class="input" type="date" name="data_ingresso" id="id_data_ingresso" required>
+                    </div>
+                </div>
+                
+                <div class="control mt-5">
+                    <button class="button is-primary" type="submit">
+                        <span class="icon is-small"><i class="fas fa-user-plus"></i></span>
+                        <span>Adicionar Aluno</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+        <h1 class="title is-3">Lista de Alunos</h1>
+        {% if alunos %}
+        <div class="box">
+            <table class="table is-fullwidth is-striped is-hoverable">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>CPF</th>
+                        <th>E-mail</th>
+                        <th>Data Ingresso</th>
+                        <th>Cursos Matriculados</th>
+                        <th class="has-text-centered">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for aluno in alunos %}
+                    <tr>
+                        <td>{{ aluno.nome }}</td>
+                        <td>{{ aluno.cpf }}</td>
+                        <td>{{ aluno.email }}</td>
+                        <td>{{ aluno.data_ingresso|date:"d/m/Y" }}</td>
+                        <td>
+                            {% for matricula in matriculas %}
+                                {% if matricula.aluno.id == aluno.id %}
+                                    {{ matricula.curso.nome }}
+                                {% endif %}
+                            {% empty %}
+                                Nenhum curso
+                            {% endfor %}
+                        </td>
+                        <td class="has-text-centered">
+                            <a href="{% url 'alunos:editar_aluno' aluno_id=aluno.id %}" class="button is-small is-warning is-light" title="Editar">
+                                <span class="icon is-small"><i class="fas fa-edit"></i></span>
+                            </a>
+                            <form method="post" action="{% url 'alunos:excluir_aluno' aluno_id=aluno.id %}" 
+                                style="display:inline;"> 
+                                {% csrf_token %}
+                                <button type="submit" 
+                                        class="button is-small is-danger is-light" 
+                                        title="Excluir"
+                                        onclick="return confirm('Tem certeza que deseja excluir {{ aluno.nome }}?');">
+                                    <span class="icon is-small"><i class="fas fa-trash-alt"></i></span>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="notification is-info is-light">
+            Não há alunos cadastrados.
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}Início - Academia Dev Python{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="title is-3">Dashboard</h1>
+        <div class="box">
+            <table class="table is-fullwidth is-striped is-hoverable">
+                <thead>
+                    <tr>
+                        <th>Total de alunos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ total_alunos }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="box">
+            <table class="table is-fullwidth is-striped is-hoverable">
+                <thead>
+                    <tr>
+                        <th>Cursos ativos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        {% for curso in total_cursos_ativos %}
+                            <td>{{ curso.nome }}</td>
+                        {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="box">
+            <table class="table is-fullwidth is-striped is-hoverable">
+                <thead>
+                    <tr>
+                        <th>Matrículas ativas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for matricula in matriculas_ativas %}
+                        <tr> 
+                            <td>{{ matricula.aluno }} / {{ matricula.curso }}</td>
+
+                            </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="3">Nenhuma matrícula ativa encontrada.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="box">
+            <table class="table is-fullwidth is-striped is-hoverable">
+                <thead>
+                    <tr>
+                        <th>Matrículas pendentes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for matricula in matriculas_inativas %}
+                        <tr> 
+                            <td>{{ matricula.aluno }} / {{ matricula.curso }}</td>
+
+                            </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="3">Nenhuma matrícula inativa encontrada.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,11 @@
+# Arquivos de Sistema e Configuração
+.env
+.DS_Store
+
+# Pastas e Arquivos Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+/local_db/
+*.sqlite3

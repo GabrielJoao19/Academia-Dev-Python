@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}Início - Academia Dev Python{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        <div class="box mb-6">
+            <h2 class="title is-4 has-text-primary">Novo Curso</h2>
+            
+            <form method="post" action="{% url 'cursos:cursos' %}"> 
+                {% csrf_token %} <div class="field">
+                    <label class="label" for="id_nome">Nome do curso</label>
+                    <div class="control">
+                        <input class="input" type="text" name="nome" id="id_nome"  required>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label" for="">Carga horária do curso</label>
+                    <div class="control">
+                        <input class="input" type="text" name="carga_horaria" id="id_cpf" required>
+                    </div>
+                </div>
+                
+                <div class="field">
+                    <label class="label" for="">Valor da inscrição</label>
+                    <div class="control">
+                        <input class="input" type="number" name="valor_inscricao" id=""  required>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label" for="">Status</label>
+                    <div class="control">
+                        <input class="input" type="text" name="status" id="" placeholder="True ou False" required>
+                    </div>
+                </div>
+                
+                <div class="control mt-5">
+                    <button class="button is-primary" type="submit">
+                        <span class="icon is-small"><i class="fas fa-user-plus"></i></span>
+                        <span>Adicionar Curso</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+        <h1 class="title is-3">Lista de Cursos</h1>
+        {% if cursos %}
+        <div class="box">
+            <table class="table is-fullwidth is-striped is-hoverable">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Carga Horária</th>
+                        <th>Valor da inscrição</th>
+                        <th>Status</th>
+                        <th class="has-text-centered">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for curso in cursos %}
+                    <tr>
+                        <td>{{ curso.nome }}</td>
+                        <td>{{ curso.carga_horaria }}</td>
+                        <td>{{ curso.valor_inscricao }}</td>
+                        <td>{{ curso.status}}</td>
+                        <td class="has-text-centered">
+                            <a href="{% url 'cursos:editar_curso' curso_id=curso.id %}" class="button is-small is-warning is-light" title="Editar">
+                                <span class="icon is-small"><i class="fas fa-edit"></i></span>
+                            </a>
+                            <form method="post" action="{% url 'cursos:excluir_curso' curso_id=curso.id %}" 
+                                style="display:inline;"> 
+                                {% csrf_token %}
+                                <button type="submit" 
+                                        class="button is-small is-danger is-light" 
+                                        title="Excluir"
+                                        onclick="return confirm('Tem certeza que deseja excluir {{ curso.nome }}?');">
+                                    <span class="icon is-small"><i class="fas fa-trash-alt"></i></span>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="notification is-info is-light">
+            Não há cursos cadastrados.
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}

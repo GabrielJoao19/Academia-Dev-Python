@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Dashboard Financeiro{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="title is-3">Resumo Financeiro por Aluno</h1>
+        
+        <table class="table is-fullwidth is-striped is-hoverable">
+            
+            <thead>
+                <tr>
+                    <th>Aluno</th>
+                    <th>Total Devido</th>
+                    <th>Total Pago</th>
+                    </tr>
+            </thead>
+            <tbody>
+                {% for item in lista_aluno_financeiro %}
+                
+                <tr> 
+                    <td>{{ item.aluno.nome }}</td> 
+                    <td>R$ {{ item.total_devido|floatformat:2 }}</td>
+                    <td>R$ {{ item.total_pago|floatformat:2 }}</td>
+                    
+                    </tr>
+                
+                {% empty %}
+                <tr>
+                    <td colspan="4">Nenhum dado financeiro de aluno disponível.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h1 class="title is-3">Matriculas</h1>
+        
+        <table class="table is-fullwidth is-striped is-hoverable">
+            
+            <thead>
+                <tr>
+                    <th>Aluno</th>
+                    <th>Curso(s)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for aluno in alunos %}
+                    <tr> 
+                        <td>{{ aluno.nome }}</td>
+                        <td>
+                            {% for matricula in matriculas %}
+                                {% if matricula.aluno.id == aluno.id %}
+                                    {{ matricula.curso.nome }}<br> 
+                                {% endif %}
+                            {% empty %}
+                                Nenhuma matrícula encontrada para este aluno.
+                            {% endfor %}
+                            </td>
+                        </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

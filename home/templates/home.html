@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}Início - Academia Dev Python{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Hero Section -->
+    <section class="section">
+    <h2 class="title is-3 has-text-centered mb-6">Navegação Rápida</h2>
+    
+    <div class="columns is-multiline">
+        
+        <div class="column is-4">
+            <a href="{% url 'alunos:alunos' %}">
+                <div class="box has-text-centered is-shadowless">
+                    <span class="icon is-large has-text-warning">
+                        <i class="fas fa-user-graduate fa-3x"></i> </span>
+                    <p class="title is-4 mt-3">Alunos</p>
+                    <p class="subtitle is-6">Cadastrar e Listar</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="column is-4">
+            <a href="{% url 'cursos:cursos' %}">
+                <div class="box has-text-centered is-shadowless">
+                    <span class="icon is-large has-text-danger">
+                        <i class="fas fa-book-open fa-3x"></i> </span>
+                    <p class="title is-4 mt-3">Cursos</p>
+                    <p class="subtitle is-6">Cadastrar e Listar</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="column is-4">
+            <a href="{% url 'matriculas:matriculas' %}">
+                <div class="box has-text-centered is-shadowless">
+                    <span class="icon is-large has-text-info">
+                        <i class="fas fa-file-signature fa-3x"></i> </span>
+                    <p class="title is-4 mt-3">Matrículas</p>
+                    <p class="subtitle is-6">Gerenciar Status</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="column is-4">
+            <a href="{% url 'financeiro:financeiro' %}">
+                <div class="box has-text-centered is-shadowless">
+                    <span class="icon is-large has-text-info">
+                       <i class="fas fa-dollar-sign fa-3x has-text-info"></i></span>
+                    <p class="title is-4 mt-3">Financeiro</p>
+                    <p class="subtitle is-6">Gerenciar Relatórios</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="column is-4">
+            <a href="{% url 'dashboard:dashboard' %}">
+                <div class="box has-text-centered is-shadowless">
+                    <span class="icon is-large has-text-info">
+                       <i class="fas fa-chart-line fa-3x"></i> </span>
+                    <p class="title is-4 mt-3">Dashboard Geral</p>
+                    <p class="subtitle is-6">Gerenciar Relatórios</p>
+                </div>
+            </a>
+        </div>
+        
+    </div>
+</section>
+
+    
+
+    
+    </section>
+
+    
+</div>
+{% endblock %}

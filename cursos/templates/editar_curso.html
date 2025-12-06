@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}Editar Curso - {{ curso.nome }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="title is-3">Editar Curso: {{ curso.nome }}</h1>
+
+        <div class="box mb-6">
+            <h2 class="subtitle is-5 has-text-warning">Modifique os campos necessários</h2>
+            
+            <form method="post" action="{% url 'cursos:editar_curso' curso_id=curso.id %}"> 
+                {% csrf_token %} 
+                
+                <div class="field">
+                    <label class="label" for="id_nome">Nome</label>
+                    <div class="control">
+                        <input class="input" type="text" name="nome" id="id_nome" 
+                               placeholder="Nome Completo" value="{{ curso.nome }}" required>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label" for="">Carga Horária</label>
+                    <div class="control">
+                        <input class="input" type="text" name="carga_horaria" id="" 
+                                value="{{ curso.carga_horaria }}" required>
+                    </div>
+                </div>
+                
+                <div class="field">
+                    <label class="label" for="">Valor da inscrição</label>
+                    <div class="control">
+                        <input class="input" type="text" name="valor_inscricao" id="" 
+                                value="{{ curso.valor_inscricao }}" required>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label" for="">Status do curso</label>
+                    <div class="control">
+                        <input class="input" type="" name="status" id="" 
+                               value="{{ curso.status }}" required>
+                    </div>
+                </div>
+                
+                <div class="control mt-5">
+                    <button class="button is-warning" type="submit">
+                        <span class="icon is-small"><i class="fas fa-save"></i></span>
+                        <span>Salvar Alterações</span>
+                    </button>
+                    <a href="" class="button is-light">
+                        Cancelar
+                    </a>
+                </div>
+            </form>
+        </div>
+        
+        <hr>
+        <div class="has-text-centered">
+            <p class="is-size-7 has-text-grey">Você está editando o registro de {{ curso.nome }}.</p>
+        </div>
+
+    </div>
+{% endblock %}

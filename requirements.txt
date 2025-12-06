@@ -1,0 +1,10 @@
+# Django e Django REST Framework
+Django~=4.2.0  
+djangorestframework~=3.14.0 
+
+# Banco de dados PostgreSQL
+psycopg2-binary
+
+# Ferramentas adicionais 
+gunicorn
+

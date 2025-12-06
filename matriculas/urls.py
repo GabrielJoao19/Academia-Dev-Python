@@ -1,12 +1,9 @@
 from django.urls import path
-from .views import MatriculaAPIView, MatriculasAPIView
-
+from .views import MatriculasVIEW, MatriculaEdicaoView, MatriculaExclusaoView
 app_name = 'matriculas'
-
 urlpatterns = [
-    path('matriculas/', MatriculasAPIView.as_view(), name='matriculas'),
-    path('matriculas/<int:pk>/', MatriculaAPIView.as_view(), name='matricula'), ## Editar, deletar uma matricula especifica
-    path('alunos/<int:aluno_pk>/matriculas', MatriculasAPIView.as_view(), name='matriculas_por_aluno'),
-    path('alunos/<int:aluno_pk>/matriculas/<int:matricula_pk>/', MatriculaAPIView.as_view(), name='matricula_por_aluno'),
+    path('', MatriculasVIEW.as_view(), name='matriculas'),
+    path('editar/<int:matricula_id>/', MatriculaEdicaoView.as_view(), name='editar_matricula'),
+    path('excluir/<int:matricula_id>/', MatriculaExclusaoView.as_view(), name='excluir_matricula'),
 ]
 

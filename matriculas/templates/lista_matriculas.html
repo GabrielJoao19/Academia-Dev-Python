@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block title %}Início - Academia Dev Python{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        <div class="box mb-6">
+            <h2 class="title is-4 has-text-primary">Nova Matricula</h2>
+            
+            <form method="post" action="{% url 'matriculas:matriculas' %}"> 
+            {% csrf_token %} 
+    
+            <div class="field">
+                <label class="label" for="id_carga_horaria">Aluno</label>
+                <div class="control">
+                    <div class="select is-fullwidth">
+                        <select name="aluno" id="" required>
+                            <option value="" disabled selected>--- Selecione o aluno ---</option>
+                            {% for aluno in alunos %}
+                                <option value="{{ aluno.id }}">{{ aluno.nome }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+           <div class="field">
+                <label class="label" for="id_carga_horaria">Curso</label>
+                <div class="control">
+                    <div class="select is-fullwidth">
+                        <select name="curso" id="" required>
+                            <option value="" disabled selected>--- Selecione o curso ---</option>
+                            {% for curso in cursos %}
+                                <option value="{{ curso.id }}">{{ curso.nome }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="field">
+                <label class="label" for="id_valor_inscricao">Status</label>
+                <div class="control">
+                    <div class="select is-fullwidth">
+                        <select name="status" id="" required>
+                            <option value="" disabled selected>--- Selecione o status ---</option>
+                            <option value="True">Ativo</option>
+                            <option value="False">Pendente</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="control mt-5">
+                    <button class="button is-primary" type="submit">
+                        <span class="icon is-small"><i class="fas fa-user-plus"></i></span>
+                        <span>Adicionar Matrícula</span>
+                    </button>
+                </div>
+        </form>
+        </div>
+        <h1 class="title is-3">Lista de Matriculas</h1>
+        {% if matriculas %}
+        <div class="box">
+            <table class="table is-fullwidth is-striped is-hoverable">
+                <thead>
+                    <tr>
+                        <th>Curso</th>
+                        <th>Aluno</th>
+                        <th>Data da matrícula</th>
+                        <th>Status</th>
+                        <th class="has-text-centered">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for matricula in matriculas %}
+                    <tr>
+                        <td>{{ matricula.curso.nome }}</td>
+                        <td>{{ matricula.aluno.nome }}</td>
+                        <td>{{ matricula.data_matricula }}</td>
+                        <td>{{ matricula.status}}</td>
+                        <td class="has-text-centered">
+                            <a href="{% url 'matriculas:editar_matricula' matricula_id=matricula.id%}" class="button is-small is-warning is-light" title="Editar">
+                                <span class="icon is-small"><i class="fas fa-edit"></i></span>
+                            </a>
+                            <form method="post" action="{% url 'matriculas:excluir_matricula' matricula_id=matricula.id %}" 
+                                style="display:inline;"> 
+                                {% csrf_token %}
+                                <button type="submit" 
+                                        class="button is-small is-danger is-light" 
+                                        title="Excluir"
+                                        onclick="return confirm('Tem certeza que deseja excluir {{matricula}}?');">
+                                    <span class="icon is-small"><i class="fas fa-trash-alt"></i></span>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="notification is-info is-light">
+            Não há matrículas cadastradas.
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -9,3 +9,7 @@ class Curso(models.Model):
     def __str__(self):
         return self.nome
     
+    @property
+    def status_descricao(self):
+        return "Ativo" if self.status else "Inativo"
+    
