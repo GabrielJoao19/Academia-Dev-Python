@@ -25,8 +25,8 @@ Certifique-se de ter o **Docker** instalado e em execução.
 ### 1. Clonar o Repositório
 
 ```bash
-git clone [https://www.youtube.com/watch?v=X49Wz3icO3E](https://www.youtube.com/watch?v=X49Wz3icO3E)
-cd [NOME DA PASTA DO PROJETO]
+git clone [https://www.youtube.com/watch?v=X49Wz3icO3E](https://github.com/GabrielJoao19/Academia-Dev-Python.git)
+cd academia
 ```
 
 ### 2. Iniciar a Aplicação (Build e Run)
