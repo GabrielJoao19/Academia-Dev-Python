@@ -25,7 +25,7 @@ Certifique-se de ter o **Docker** instalado e em execução.
 ### 1. Clonar o Repositório
 
 ```bash
-git clone [https://www.youtube.com/watch?v=X49Wz3icO3E](https://github.com/GabrielJoao19/Academia-Dev-Python.git)
+git clone https://github.com/GabrielJoao19/Academia-Dev-Python.git
 cd academia
 ```
 
